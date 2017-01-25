@@ -1,0 +1,84 @@
+<!doctype html>
+<head><title>Τα κράτη της Ευρώπης</title>
+  <meta charset="utf-8">
+<style type="text/css">
+#velos{position:absolute;visibility:hidden;}
+#hartis{position:absolute;top:0;left:0;}
+#koumpi{position:absolute;left:500px;top:0;font-size:12pt; font-family:"Verdana";}
+#plhrof{position:absolute; border-style:solid; border-color:black;
+	border-size:2px; margin:auto; text-align:center;visibility:hidden;}
+#epomeno{font-family:"Arial";font-size:15pt;}
+</style>
+<script>
+var hores=["Αζερμπαϊτζάν","Αλβανία","Αρμενία","Αυστρία","Βέλγιο","Βοσνία-Ερζεγοβίνη",
+"Βουλγαρία","Γαλλία","Γερμανία","Γεωργία","Δανία","Ελβετία","Ελλάδα","Εσθονία",
+"Ηνωμένο Βασίλειο","Ιρλανδία","Ισλανδία","Ισπανία","Ιταλία","Κροατία","Κύπρος","Λετονία",
+"Λευκορωσία","Λιθουανία","Λουξεμβούργο","Μάλτα","Μαυροβούνιο","Μολδαβία","Νορβηγία",
+"Ολλανδία","Ουγγαρία","Ουκρανία","ΠΓΔΜ","Πολωνία","Πορτογαλία","Ρουμανία","Ρωσία","Σερβία",
+"Σλοβακία","Σλοβενία","Σουηδία","Τουρκία","Τσεχία","Φινλανδία"];
+var protevouses=["Μπακού","Τίρανα","Ερεβάν","Βιέννη","Βρυξέλλες","Σαράγεβο","Σόφια","Παρίσι",
+"Βερολίνο","Τιφλίδα","Κοπεγχάγη","Βέρνη","Αθήνα","Ταλίν","Λονδίνο","Δουβλίνο","Ρέικιαβικ",
+"Μαδρίτη","Ρώμη","Ζάγκρεμπ","Λευκωσία","Ρίγα","Μινσκ","Βίλνιους","Λουξεμβούργο","Βαλέτα",
+"Ποντγκόριτσα","Κισινάου","Όσλο","Άμστερνταμ","Βουδαπέστη","Κίεβο","Σκόπια","Βαρσοβία",
+"Λισαβόνα","Βουκουρέστι","Μόσχα","Βελιγράδι","Μπρατισλάβα","Λιουμπλιάνα","Στοκχόλμη",
+"Άγκυρα","Πράγα","Ελσίνκι"];
+var horesx=[413,218,392,190,139,207,257,115,170,383,177,151,240,259,109,81,100,52,170,198,320,255,274,250,144,172,216,279,187,148,224,300,234,224,18,257,387,227,222,189,207,323,200,263];
+var horesy=[273,297,281,228,189,266,283,230,195,268,150,228,320,132,163,144,29,263,278,249,349,147,178,163,200,337,278,240,105,176,235,222,289,193,257,250,101,269,222,246,113,306,212,95];
+var NH=hores.length;
+var N=0;
+
+function randomhora()
+{
+N=Math.round(Math.random()*(NH-1));
+document.getElementById("velos").style.left=horesx[N]+"px";
+document.getElementById("velos").style.top=horesy[N]+"px";
+document.getElementById("velos").style.visibility='visible';
+R=N;
+}
+function krypseplhrof() {
+	document.getElementById("plhrof").style.visibility='hidden';
+}
+function deiksekoumpi() {
+	document.getElementById("koumpi").style.visibility='visible';
+}
+function checkhora(r) {
+	document.getElementById("koumpi").style.visibility='hidden';
+	if (r==R)
+	 {x="Σωστά!";
+		 document.getElementById("plhrof").style.backgroundColor="lightgreen";} 
+	else 
+	{x="Λάθος!";
+		document.getElementById("plhrof").style.backgroundColor="silver";}
+	onomahoras=(hores[R]).replace(" ","_");
+	if (R==15) {onomahoras="Έιρε";}
+	document.getElementById("plhrof").style.left=horesx[R]-15+"px";
+	document.getElementById("plhrof").style.top=horesy[R]+35+"px";
+	document.getElementById("plhrof").style.fontFamily="Times New Roman";
+	document.getElementById("plhrof").style.fontSize="25px";
+	document.getElementById("plhrof").innerHTML=
+			x+"<br><img src='simaies\\"+onomahoras+".png'>"+
+			"<br><b>"+hores[R]+"</b><br>Πρωτεύουσα: <b>"+protevouses[R]+
+			"</b><br><a href='https://el.wikipedia.org/wiki/"+onomahoras+
+			"' target='_blank'>Διάβασε στη Βικιπαίδεια</a>"+
+			"<br><input type='button' id='epomeno' value='Πάμε στο επόμενο!'  onclick='krypseplhrof();deiksekoumpi();randomhora();'>";
+	document.getElementById("plhrof").style.visibility='visible';
+}
+
+function grapsehores() {
+document.write("<select name='select1' size=17 id='koumpi'>");
+for (var i=0;i<NH;i++) {
+      document.write("<option value='choice"+i+"' onclick='checkhora("+i+")'>"+hores[i]);
+}
+}
+</script>
+</head>
+<body>
+<img src="europe.jpg" id="hartis">
+<img src="point.gif" id="velos">
+<div id="plhrof"></div>
+<script>
+grapsehores();
+randomhora();
+</script>
+</body>
+</html>
